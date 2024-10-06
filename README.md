@@ -9,6 +9,23 @@ kitchen-pal is a small console program designed for that moment when you sit dow
 You will need the following software installed on your machine: 
 
 * Python [https://www.python.org/downloads/]
-* SQLite [https://www.sqlite.org/download.html]
+* SQLite [https://www.sqlite.org/download.html]****
 
-### storing recipes 
+Once those items have been installed, clone the kitchen-pal repository to your machine to get cooking. 
+
+### managing your recipe database 
+
+Several recipes have been preloaded for your convenience. To review the existing database: 
+
+1. Navigate to your local repository.
+2. Open recipes.db.
+3. Use the Browse Data tab to review your recipes.
+
+#### adding new recipes 
+
+4. Insert a new record into the current table using the icons located at the top of the Browse Data Tab.
+5. Complete the following fields for the new record:
+   a. name: Enter recipe name.
+   b. ingredients: Enter the recipe ingredients as a comma-separated list.
+   c. link: Optionally, you may copy and paste a link to the recipe.
+**Note:** You may also add new records to your table on the Execute SQL tab by adapting the following SQL command : _INSERT INTO recipes (name, ingredients, link) VALUES ("RECIPE NAME HERE", "INGREDIENT1, INGREDIENT2, INGREDIENT3", "link")_
