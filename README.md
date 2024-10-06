@@ -24,8 +24,6 @@ Several recipes have been preloaded for your convenience. To review the existing
 #### adding new recipes 
 
 4. Insert a new record into the current table using the icons located at the top of the Browse Data Tab.
-5. Complete the following fields for the new record:
-   a. name: Enter recipe name.
-   b. ingredients: Enter the recipe ingredients as a comma-separated list.
-   c. link: Optionally, you may copy and paste a link to the recipe.
+5. Complete the name, ingredients, and link fields.
+
 **Note:** You may also add new records to your table on the Execute SQL tab by adapting the following SQL command : _INSERT INTO recipes (name, ingredients, link) VALUES ("RECIPE NAME HERE", "INGREDIENT1, INGREDIENT2, INGREDIENT3", "link")_
