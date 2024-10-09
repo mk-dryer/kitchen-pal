@@ -10,7 +10,7 @@ import sqlite3
 
 def locate_db():
     cwd = os.getcwd()
-    filepath = os.path.join(cwd, "recipes.db")
+    filepath = os.path.join(cwd, "recipeCodex.db")
     if os.path.exists(filepath):
         print("I've located your recipe codex.")
     else:
@@ -20,7 +20,7 @@ def locate_db():
 
 # connect to database 
 
-conn = sqlite3.connect(r"C:\Users\MK\Desktop\python projects\kitchen-pal\recipes.db")
+conn = sqlite3.connect(r".\recipeCodex.db") 
 cursor = conn.cursor()
 
 # create a table to store recipes if not already exists 
@@ -83,7 +83,7 @@ def generate_shopping_list():
     return shopping_list
 
 # main program
-print("Welcome to the Dinner Planner!")
+print("Welcome to kitchen-pal!")
 locate_db()
 done = False # declare done as False to trigger loop 
 propose_recipe() # invoke propose recipe 
