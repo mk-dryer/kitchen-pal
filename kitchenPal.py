@@ -1,8 +1,22 @@
+# TODO: locate .db to check file architecture 
 
 # import libs and functions 
 
+import os
 import random
 import sqlite3
+
+# verify database and program located in same folder
+
+def locate_db():
+    cwd = os.getcwd()
+    filepath = os.path.join(cwd, "recipes.db")
+    if os.path.exists(filepath):
+        print("I've located your recipe codex.")
+    else:
+        print("Uh-oh! I can't find", filepath + ". Make sure that I'm stored in the same folder as", filepath+".")
+        exit()
+
 
 # connect to database 
 
@@ -70,6 +84,7 @@ def generate_shopping_list():
 
 # main program
 print("Welcome to the Dinner Planner!")
+locate_db()
 done = False # declare done as False to trigger loop 
 propose_recipe() # invoke propose recipe 
 if done: # once done = True: 
