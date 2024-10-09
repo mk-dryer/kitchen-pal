@@ -27,7 +27,7 @@ Several recipes have been preloaded for your convenience. To review the existing
 2. Complete the following fields in the table:
    - **Recipe_Name**
    - **Recipe_Ingredients**
-   - **Recipe_Link**  
+   - **Recipe_Link** (optional)  
 
 You may also add new records to your table on the Execute SQL tab by adapting the following SQL command : _INSERT INTO recipes (Recipe_Name, Recipe_Ingredients, Recipe_Link) VALUES ("RECIPE NAME HERE", "INGREDIENT1, INGREDIENT2, INGREDIENT3", "link")_
 
