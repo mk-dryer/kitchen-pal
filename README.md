@@ -25,11 +25,11 @@ Several recipes have been preloaded for your convenience. To review the existing
 
 1. Insert a new record into the current table using the icons located at the top of the Browse Data Tab.
 2. Complete the following fields in the table:
-   - **recipe name***
-   - **recipe ingredients***
-   - **link**  
+   - **Recipe_Name**
+   - **Recipe_Ingredients**
+   - **Recipe_Link**  
 
-You may also add new records to your table on the Execute SQL tab by adapting the following SQL command : _INSERT INTO recipes (name, ingredients, link) VALUES ("RECIPE NAME HERE", "INGREDIENT1, INGREDIENT2, INGREDIENT3", "link")_
+You may also add new records to your table on the Execute SQL tab by adapting the following SQL command : _INSERT INTO recipes (Recipe_Name, Recipe_Ingredients, Recipe_Link) VALUES ("RECIPE NAME HERE", "INGREDIENT1, INGREDIENT2, INGREDIENT3", "link")_
 
 **Note:** You may choose to omit a recipe link when adding new records to the table. I recommend you include it for your own information. I once made the most wonderful Thai pumpkin soup from an online recipe but lost the link. I consider this to be one of the great tragedies of my life. However, only the **recipe name** and **recipe ingredients** fields are called by the program. 
 
