@@ -31,7 +31,7 @@ Several recipes have been preloaded for your convenience. To review the existing
 
 You may also add new records to your table on the Execute SQL tab by adapting the following SQL command : _INSERT INTO recipes (Recipe_Name, Recipe_Ingredients, Recipe_Link) VALUES ("RECIPE NAME HERE", "INGREDIENT1, INGREDIENT2, INGREDIENT3", "link")_
 
-**Note:** You may choose to omit a recipe link when adding new records to the table. I recommend you include it for your own information. I once made the most wonderful Thai pumpkin soup from an online recipe but lost the link. I consider this to be one of the great tragedies of my life. However, only the **Recipe_Name** and **Recipe_Ingredients** fields are called by the program. 
+**Note:** You may choose to omit a recipe link when adding new records to the table because only the **Recipe_Name** and **Recipe_Ingredients** fields are called by the program. However, I recommend you include a link for your own information. I once made the most wonderful Thai pumpkin soup from an online recipe but lost the link. I consider this to be one of the great tragedies of my life.
 
 #### removing recipes 
 To discard a recipe, select the row you want to remove then use the icons located at the top of the Browse Data tab to delete. 
