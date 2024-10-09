@@ -1,4 +1,4 @@
-# TODO: locate .db to check file architecture 
+# TODO: update references to table column names
 
 # import libs and functions 
 
@@ -28,9 +28,9 @@ cursor = conn.cursor()
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS recipes (
          id INTEGER PRIMARY KEY AUTOINCREMENT,
-         name TEXT,
-         ingredients TEXT, 
-         link TEXT
+         Recipe_Name TEXT,
+         Recipe_Ingredients TEXT, 
+         Recipe_Link TEXT
      )
  """)
 conn.commit()
@@ -44,11 +44,11 @@ declined_recipes = []
 # function to propose recipes 
 def propose_recipe():
     global done # declare var done 
-    cursor.execute("SELECT name, ingredients FROM recipes") # select name & ingredients cols from recipe entries 
+    cursor.execute("SELECT Recipe_Name, Recipe_Ingredients FROM recipes") # select name & ingredients cols from recipe entries 
     rows = cursor.fetchall() # fetch all rows 
     
     while not done: # while done = False: 
-        known_recipes = [{'name': row[0], 'ingredients': row[1]} for row in rows] # process all recipe name & ingredients as dict 
+        known_recipes = [{'Recipe_Name': row[0], 'Recipe_Ingredients': row[1]} for row in rows] # process all recipe name & ingredients as dict 
         available_recipes = [recipe for recipe in known_recipes if recipe not in selected_recipes and recipe not in declined_recipes] # available recipes = all known recipes not yet selected or declined 
         if not available_recipes: # if no recipes available: 
             print("You've already selected all available recipes.")
@@ -56,11 +56,11 @@ def propose_recipe():
             break
         
         recipe = random.choice(available_recipes) # randomly select from list of available recipes 
-        print(f"Do you want to make {recipe['name']}? (y/n)") # propose recipe to user 
+        print(f"Do you want to make {recipe['Recipe_Name']}? (y/n)") # propose recipe to user 
         choice = input().strip().lower() # process input 
         if choice == 'y':
             selected_recipes.append(recipe) # append to selected list 
-            print(f"{recipe['name']} added to your list.") 
+            print(f"{recipe['Recipe_Name']} added to your list.") 
         else: 
             declined_recipes.append(recipe) # append to declined 
             print("No problem.") # and proceed to next choice 
@@ -76,7 +76,7 @@ def propose_recipe():
 def generate_shopping_list(): 
     shopping_list = [] # intialize empty shopping list 
     for recipe in selected_recipes: # for each recipe 
-        ingredients = recipe['ingredients'] # access ingredients 
+        ingredients = recipe['Recipe_Ingredients'] # access ingredients 
         for ingredient in ingredients.split(","): # split by comma  
             shopping_list.append(ingredient.strip()) # and append to shopping list 
     shopping_list = sorted(list(set(shopping_list))) # remove duplicates and sort the shopping list
@@ -90,7 +90,7 @@ propose_recipe() # invoke propose recipe
 if done: # once done = True: 
     print("Great! You've selected the following recipes:") # review selected recipes 
     for recipe in selected_recipes:
-        print(recipe['name'])
+        print(recipe['Recipe_Name'])
     shopping_list = generate_shopping_list() # invoke generate list
     print("\nHere's your shopping list:")
     for item in shopping_list:
@@ -100,4 +100,4 @@ else:
 
 conn.close()
 
-## INSERT INTO recipes (name, ingredients, link) VALUES ("Lemon Garlic Butter Chicken and Brussels Sprouts", "brussels sprouts, olive oil, salt, pepper, paprika, chicken tenderloins, Italian seasoning, red pepper flakes, lemon juice, butter", "https://juliasalbum.com/lemon-garlic-butter-chicken/")y
+## INSERT INTO recipes (Recipe_Name, Recipe_Ingredients, Recipe_Link) VALUES ("Lemon Garlic Butter Chicken and Brussels Sprouts", "brussels sprouts, olive oil, salt, pepper, paprika, chicken tenderloins, Italian seasoning, red pepper flakes, lemon juice, butter", "https://juliasalbum.com/lemon-garlic-butter-chicken/")y
