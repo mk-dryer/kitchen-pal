@@ -5,7 +5,7 @@ kitchen-pal is a small console program designed for that moment when you sit dow
 
 ## how to use 
 
-### set-up
+### setup
 You will need the following software installed on your machine: 
 
 * [Python](https://www.python.org/downloads/)
