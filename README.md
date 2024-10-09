@@ -13,7 +13,8 @@ You will need the following software installed on your machine:
   
 Once those items have been installed, clone the kitchen-pal repository to your machine to get cooking. 
 
-### managing your recipe database 
+### managing your recipe table 
+**Note:** This section presumes you are working in a SQLite browser. 
 
 Several recipes have been preloaded for your convenience. To review the existing database: 
 
