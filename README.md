@@ -18,7 +18,7 @@ Once those items have been installed, clone the kitchen-pal repository to your m
 Several recipes have been preloaded for your convenience. To review the existing database: 
 
 1. Navigate to your local repository.
-2. Open recipes.db.
+2. Open recipeCodex.db.
 3. Use the Browse Data tab to review your recipes.
 
 #### adding new recipes 
