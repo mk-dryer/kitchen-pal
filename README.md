@@ -1,7 +1,7 @@
 # kitchen-pal
 a virtual recipe box
 
-kitchen-pal is a small console program designed for that moment when you sit down to plan your meals and forget every dish you've ever liked. Store your favorite recipes in the SQLite database recipes.db. When you run kitchenPal.py, the program will suggest recipes from the database that you may accept or decline. After you have completed your selections, the program will generate a weekly shopping list. 
+kitchen-pal is a small console program designed for that moment when you sit down to plan your meals and forget every dish you've ever liked. Store your favorite recipes in the recipes.db database. When you run kitchenPal.py, the program will suggest recipes from the database that you may accept or decline. After you have completed your selections, the program will generate a weekly shopping list. 
 
 ## how to use 
 
@@ -9,12 +9,12 @@ kitchen-pal is a small console program designed for that moment when you sit dow
 You will need the following software installed on your machine: 
 
 * [Python](https://www.python.org/downloads/)
-* [SQLite](https://www.sqlite.org/download.html) or another database browser
+* [SQLite](https://www.sqlite.org/download.html) or your preferred database browser
   
 Once those items have been installed, clone the kitchen-pal repository to your machine to get cooking. 
 
 ### managing your recipe table 
-**Note:** This section presumes you are working in a SQLite browser. 
+**Note:** This section presumes you are working in a SQLite browser.
 
 Several recipes have been preloaded for your convenience. To review the existing database: 
 
@@ -30,7 +30,7 @@ Several recipes have been preloaded for your convenience. To review the existing
    - **Recipe_Ingredients**
    - **Recipe_Link** (optional)  
 
-You may also add new records to your table on the Execute SQL tab by adapting the following SQL command : _INSERT INTO recipes (Recipe_Name, Recipe_Ingredients, Recipe_Link) VALUES ("RECIPE NAME HERE", "INGREDIENT1, INGREDIENT2, INGREDIENT3", "link")_
+You may also add new records to your table on the Execute SQL tab by adapting the following SQL command: _INSERT INTO recipes (Recipe_Name, Recipe_Ingredients, Recipe_Link) VALUES ("RECIPE NAME HERE", "INGREDIENT1, INGREDIENT2, INGREDIENT3", "link")_
 
 **Note:** You may omit a recipe link when adding new records to the table because only the **Recipe_Name** and **Recipe_Ingredients** fields are utilized by the program. However, I recommend you include a link for your own information. I once made the most wonderful Thai pumpkin soup from an online recipe but lost the link. I consider this to be one of the great tragedies of my life.
 
@@ -52,4 +52,4 @@ kitchen-pal will now suggest recipes from your database of known recipes. You wi
 
 ### troubleshooting 
 
-- Be mindful about moving either kitchenPal.py or recipesCodex.db once you clone the repository from Github. These files must be stored in the same folder in order for kitchenPal.py to connect to the database.
+- Be mindful of where you store your local copies of kitchenPal.py and recipesCodex.db. The program cannot connect to the database unless both files are located in the same directory.
