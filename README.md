@@ -16,8 +16,6 @@ Once those items have been installed, clone the kitchen-pal repository to your m
 ### Managing Your Recipe Table 
 **Note:** This section presumes you are working in a SQLite browser.
 
-#### Reviewing Existing Recipes
-
 Several recipes have been preloaded for your convenience. To review the existing database: 
 
 1. Navigate to your local kitchen-pal repository.
