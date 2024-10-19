@@ -5,6 +5,7 @@
 import os
 import random
 import sqlite3
+import tkinter as tk
 
 # verify database and program located in same folder
 
@@ -73,6 +74,11 @@ def generate_shopping_list():
     return shopping_list
 
 # main program
+window = tk.Tk()
+window.title("kitchen-pal.py")
+label = tk.Label(window, text="Welcome to kitchen-pal!")
+label.pack()
+window.mainloop()
 print("Welcome to kitchen-pal!")
 locate_db()
 done = False # declare done as False to trigger loop 
