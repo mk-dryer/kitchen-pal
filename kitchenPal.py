@@ -23,18 +23,6 @@ def locate_db():
 conn = sqlite3.connect(r".\recipeCodex.db") 
 cursor = conn.cursor()
 
-# create a table to store recipes if not already exists 
-
-# cursor.execute("""
-#     CREATE TABLE IF NOT EXISTS recipes (
-#          id INTEGER PRIMARY KEY AUTOINCREMENT,
-#          name TEXT,
-#          ingredients TEXT, 
-#          link TEXT
-#      )
-#  """)
-# conn.commit()
-
 
 # initialize an empty list to store selected & declined recipes
 
@@ -101,7 +89,3 @@ else:
     print("You haven't selected any recipes. Have a great day!")
 
 conn.close()
-
-## INSERT INTO recipes (RecipeName, RecipeIngredients, link) VALUES ("Lemon Garlic Butter Chicken and Brussels Sprouts", "brussels sprouts, olive oil, salt, pepper, paprika, chicken tenderloins, Italian seasoning, red pepper flakes, lemon juice, butter", "https://juliasalbum.com/lemon-garlic-butter-chicken/")y
-##  ALTER TABLE recipes
-### RENAME COLUMN name to RecipeName;
