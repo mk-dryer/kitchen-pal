@@ -10,7 +10,7 @@ kitchen-pal is a small console program designed for that moment when you sit dow
 You will need the following software installed on your machine: 
 
 * [Python](https://www.python.org/downloads/)
-* [SQLite](https://www.sqlite.org/download.html](https://sqlitebrowser.org/) or your preferred database browser
+* [SQLite Browser](https://sqlitebrowser.org/) or your preferred database browser
   
 Once those items have been installed, clone the kitchen-pal repository to your machine to get cooking. 
 
