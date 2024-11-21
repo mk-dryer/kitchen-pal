@@ -6,18 +6,17 @@ import sqlite3
 # initialize an empty list to store selected & declined recipes
 
 seen_recipes = []
+chosen_recipes = []
+shopping_list = []
 
 # suggest a recipe from the database
 def suggest_recipe():
-    global selected_recipes  # access global list  
 
     conn = sqlite3.connect('recipeCodex.db') # connect to db
     cursor = conn.cursor()
-
     cursor.execute("SELECT RecipeName, RecipeIngredients FROM recipes") # select all recipes
     all_recipes = cursor.fetchall() # fetch all as tuples
     conn.close()
-
 
     unseen_recipes = [recipe for recipe in all_recipes if recipe[0] not in [r[0] for r in seen_recipes]]
 
@@ -26,12 +25,13 @@ def suggest_recipe():
         seen_recipes.append(recipe)  # append it to the list of seen recipes
         recipe_label.config(text=f"How about: {recipe[0]}?")
     else:
-        recipe_label.config(text="No recipes found!")
+        recipe_label.config(text="You've seen all the recipes.")
 
 # add recipe to listbox
 def confirm_recipe():
-    recipe_item = recipe_label.cget("text").replace("How about: ", "").rstrip("?") # format label for listbox  
+    recipe_item = recipe_label.cget("text").replace("How about: ", "").rstrip("?") # format label for listbox 
     menu_listbox.insert(tk.END, recipe_item) # insert formatted label into listbox
+
 
 # generate the shopping list when triggered 
 def generate_shopping_list():
