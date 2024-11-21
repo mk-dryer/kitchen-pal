@@ -5,38 +5,33 @@ import sqlite3
 
 # initialize an empty list to store selected & declined recipes
 
-selected_recipes = []
-declined_recipes = []
+seen_recipes = []
 
-# Function to suggest a recipe from the database
+# suggest a recipe from the database
 def suggest_recipe():
-    global selected_recipes  # Access the global list
-    
-    # Connect to the SQLite database
-    conn = sqlite3.connect('recipeCodex.db')
+    global selected_recipes  # access global list  
+
+    conn = sqlite3.connect('recipeCodex.db') # connect to db
     cursor = conn.cursor()
 
-    # Query to select all recipes if we haven't already fetched them
-    cursor.execute("SELECT RecipeName FROM recipes")
+    cursor.execute("SELECT RecipeName, RecipeIngredients FROM recipes") # select all recipes
     all_recipes = [row[0] for row in cursor.fetchall()]
     conn.close()
 
-    # Find unsuggested recipes by subtracting suggested ones
-    unselected_recipes = list(set(all_recipes) - set(selected_recipes))
+    unselected_recipes = list(set(all_recipes) - set(seen_recipes)) # create list of unseen recipes by subtracting selected_recipes ones
 
-    if unselected_recipes:
-        # Select a random recipe from the unsuggested list
-        selected_recipe = random.choice(unselected_recipes)
-        selected_recipes.append(selected_recipe)  # Mark it as suggested
-        recipe_label.config(text=f"How about: {selected_recipe}?")
+    if unselected_recipes: # if the unselected_recipes list is populated: 
+        recipe = random.choice(unselected_recipes) # select one at random
+        seen_recipes.append(recipe)  # append it to the list of seen recipes
+        recipe_label.config(text=f"How about: {recipe}?")
     else:
         recipe_label.config(text="No recipes found!")
 
-# Function to confirm and add the recipe to the weekly list
+# add recipe to listbox
 def confirm_recipe():
-    selected_recipe = recipe_label.cget("text").replace("How about: ", "").rstrip("?")
-    if selected_recipe:
-        weekly_listbox.insert(tk.END, selected_recipe)
+    recipe = recipe_label.cget("text").replace("How about: ", "").rstrip("?")
+    if recipe:
+        weekly_listbox.insert(tk.END, recipe)
     else:
         messagebox.showerror("Error", "No recipe selected")
 
@@ -111,11 +106,6 @@ root.mainloop()
 #         print("Uh-oh! I can't find", filepath + ". Make sure that I'm stored in the same folder as", filepath+".")
 #         exit()
 
-
-# # connect to database 
-
-# conn = sqlite3.connect(r".\recipeCodex.db") 
-# cursor = conn.cursor()
 
 
 
