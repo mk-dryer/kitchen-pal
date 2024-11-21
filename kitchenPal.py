@@ -15,15 +15,16 @@ def suggest_recipe():
     cursor = conn.cursor()
 
     cursor.execute("SELECT RecipeName, RecipeIngredients FROM recipes") # select all recipes
-    all_recipes = [row[0] for row in cursor.fetchall()]
+    all_recipes = cursor.fetchall() # fetch all as tuples
     conn.close()
+
 
     unselected_recipes = list(set(all_recipes) - set(seen_recipes)) # create list of unseen recipes by subtracting selected_recipes ones
 
     if unselected_recipes: # if the unselected_recipes list is populated: 
         recipe = random.choice(unselected_recipes) # select one at random
         seen_recipes.append(recipe)  # append it to the list of seen recipes
-        recipe_label.config(text=f"How about: {recipe}?")
+        recipe_label.config(text=f"How about: {recipe[0]}?")
     else:
         recipe_label.config(text="No recipes found!")
 
