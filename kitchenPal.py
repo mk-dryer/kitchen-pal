@@ -20,7 +20,7 @@ def suggest_recipe():
 
 
     unseen_recipes = [recipe for recipe in all_recipes if recipe[0] not in [r[0] for r in seen_recipes]]
-    
+
     if unseen_recipes: # if the unselected_recipes list is populated: 
         recipe = random.choice(unseen_recipes) # select one at random
         seen_recipes.append(recipe)  # append it to the list of seen recipes
@@ -35,7 +35,19 @@ def confirm_recipe():
 
 # generate the shopping list when triggered 
 def generate_shopping_list():
-    messagebox.showinfo("Shopping List", "This will generate your shopping list.")
+    shopping_list = []  # Initialize an empty shopping list
+
+    for recipe in seen_recipes:  # Loop through selected recipes
+        ingredients = recipe[1]  # Access RecipeIngredients (second item in tuple)
+        for ingredient in ingredients.split(","):  # Split ingredients by commas
+            shopping_list.append(ingredient.strip())  # Add stripped ingredient to the list
+
+    # Remove duplicates, sort the list, and return it
+    shopping_list = sorted(set(shopping_list))
+    messagebox.showinfo("Shopping List", shopping_list)
+
+
+
 
 # hide welcome screen and display to main interface when triggered
 def proceed_to_main():
@@ -105,50 +117,3 @@ root.mainloop()
 #             shopping_list.append(ingredient.strip()) # and append to shopping list 
 #     shopping_list = sorted(list(set(shopping_list))) # remove duplicates and sort the shopping list
 #     return shopping_list
-
-# def proceed_to_main():
-#     welcome_frame.pack_forget()  # Hide the welcome frame
-#     main_frame.pack(fill="both", expand=True)  # Show the main frame
-
-# # main program
-
-# root = tk.Tk()
-# root.title("KitchenPal")
-# root.geometry("400x400")
-
-# # welcome frame
-# welcome_frame = tk.Frame(root)
-# welcome_frame.pack(fill="both", expand=True)
-
-# welcome_label = tk.Label(welcome_frame, text="Welcome to kitchen-pal.py!", font=("Arial", 16))
-# welcome_label.pack(pady=20)
-
-# proceed_button = tk.Button(welcome_frame, text="Proceed", command=proceed_to_main)
-# proceed_button.pack(pady=10)
-
-# main_frame = tk.Frame(root)
-# suggest_button = tk.Button(main_frame, text="Suggest Recipe", command=propose_recipe)
-# suggest_button.pack(pady=10)
-
-# recipe_label = tk.Label(main_frame, text="Your recipe suggestion will appear here.")
-# recipe_label.pack(pady=10)
-
-# root.mainloop()
-
-# print("Welcome to kitchen-pal!")
-# locate_db()
-# done = False # declare done as False to trigger loop 
-# propose_recipe() # invoke propose recipe 
-# if done: # once done = True: 
-#     print("Great! You've selected the following recipes:") # review selected recipes 
-#     for recipe in selected_recipes:
-#         print(recipe['RecipeName'])
-#     shopping_list = generate_shopping_list() # invoke generate list
-#     print("\nHere's your shopping list:")
-#     for item in shopping_list:
-#         print(item)
-# else:
-#     print("You haven't selected any recipes. Have a great day!")
-
-# conn.close()
-
