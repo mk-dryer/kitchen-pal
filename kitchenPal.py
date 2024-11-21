@@ -29,11 +29,12 @@ def suggest_recipe():
 
 # add recipe to listbox
 def confirm_recipe():
-    recipe = recipe_label.cget("text").replace("How about: ", "").rstrip("?")
-    if recipe:
-        weekly_listbox.insert(tk.END, recipe)
-    else:
-        messagebox.showerror("Error", "No recipe selected")
+    recipe_item = recipe_label.cget("text").replace("How about: ", "").rstrip("?") # format label for listbox  
+    if recipe_item: # if item found
+        weekly_listbox.insert(tk.END, recipe_item) # insert into listbox
+    else: 
+        messagebox.showerror("Error", "You've already seen all recipes!")
+        # TODO: Add option to loop through again 
 
 # Function to generate the shopping list
 def generate_shopping_list():
