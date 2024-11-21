@@ -30,54 +30,40 @@ def suggest_recipe():
 # add recipe to listbox
 def confirm_recipe():
     recipe_item = recipe_label.cget("text").replace("How about: ", "").rstrip("?") # format label for listbox  
-    if recipe_item: # if item found
-        weekly_listbox.insert(tk.END, recipe_item) # insert into listbox
-    else: 
-        messagebox.showerror("Error", "You've already seen all recipes!")
-        # TODO: Add option to loop through again 
+    menu_listbox.insert(tk.END, recipe_item) # insert formatted label into listbox
 
-# Function to generate the shopping list
+# generate the shopping list when triggered 
 def generate_shopping_list():
     messagebox.showinfo("Shopping List", "This will generate your shopping list.")
 
-# Function to hide welcome screen and display main interface
+# hide welcome screen and display to main interface when triggered
 def proceed_to_main():
-    welcome_frame.pack_forget()  # Hide the welcome frame
-    main_frame.pack(fill="both", expand=True)  # Show the main frame
+    welcome_frame.pack_forget()  # hide welcome frame
+    main_frame.pack(fill="both", expand=True)  # show main frame
 
-# Create the main window
+# create main window
 root = tk.Tk()
 root.title("KitchenPal")
 root.geometry("400x400")
 
-# Welcome Frame
+# create welcome frame
 welcome_frame = tk.Frame(root)
 welcome_frame.pack(fill="both", expand=True)
-
 welcome_label = tk.Label(welcome_frame, text="Welcome to kitchen-pal.py!", font=("Arial", 16))
 welcome_label.pack(pady=20)
-
 proceed_button = tk.Button(welcome_frame, text="Proceed", command=proceed_to_main)
 proceed_button.pack(pady=10)
 
-# Main Frame (Initially hidden)
+# create main frame with Suggest button, recipe label, Confirm button, listbox
 main_frame = tk.Frame(root)
-
-# Suggest Recipe Button
 suggest_button = tk.Button(main_frame, text="Suggest Recipe", command=suggest_recipe)
 suggest_button.pack(pady=10)
-
-# Label to display suggested recipe
-recipe_label = tk.Label(main_frame, text="Your recipe suggestion will appear here.")
+recipe_label = tk.Label(main_frame, text="Your recipe will appear here.")
 recipe_label.pack(pady=10)
-
-# Confirm Button to add recipe to weekly list
 confirm_button = tk.Button(main_frame, text="Confirm Recipe", command=confirm_recipe)
 confirm_button.pack(pady=10)
-
-# Listbox to display the weekly list
-weekly_listbox = tk.Listbox(main_frame, height=6)
-weekly_listbox.pack(pady=10)
+menu_listbox = tk.Listbox(main_frame, height=6)
+menu_listbox.pack(pady=10)
 
 # Button to generate shopping list
 shopping_list_button = tk.Button(main_frame, text="Generate Shopping List", command=generate_shopping_list)
