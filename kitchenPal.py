@@ -20,7 +20,7 @@ def suggest_recipe():
 
 # Function to confirm and add the recipe to the weekly list
 def confirm_recipe():
-    selected_recipe = recipe_label.cget("text").replace("How about: ", "")
+    selected_recipe = recipe_label.cget("text").replace("How about: ", "").rstrip("?")
     if selected_recipe:
         weekly_listbox.insert(tk.END, selected_recipe)
     else:
