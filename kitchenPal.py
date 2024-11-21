@@ -1,20 +1,34 @@
 import tkinter as tk
 from tkinter import messagebox
+import random
 import sqlite3
+
+# initialize an empty list to store selected & declined recipes
+
+selected_recipes = []
+declined_recipes = []
 
 # Function to suggest a recipe from the database
 def suggest_recipe():
+    global selected_recipes  # Access the global list
+    
     # Connect to the SQLite database
     conn = sqlite3.connect('recipeCodex.db')
     cursor = conn.cursor()
 
-    # Query to select a random recipe
-    cursor.execute("SELECT RecipeName FROM recipes ORDER BY RANDOM() LIMIT 1")
-    result = cursor.fetchone()
+    # Query to select all recipes if we haven't already fetched them
+    cursor.execute("SELECT RecipeName FROM recipes")
+    all_recipes = [row[0] for row in cursor.fetchall()]
     conn.close()
 
-    if result:
-        recipe_label.config(text=f"How about: {result[0]}?")
+    # Find unsuggested recipes by subtracting suggested ones
+    unselected_recipes = list(set(all_recipes) - set(selected_recipes))
+
+    if unselected_recipes:
+        # Select a random recipe from the unsuggested list
+        selected_recipe = random.choice(unselected_recipes)
+        selected_recipes.append(selected_recipe)  # Mark it as suggested
+        recipe_label.config(text=f"How about: {selected_recipe}?")
     else:
         recipe_label.config(text="No recipes found!")
 
@@ -104,10 +118,6 @@ root.mainloop()
 # cursor = conn.cursor()
 
 
-# # initialize an empty list to store selected & declined recipes
-
-# selected_recipes = []
-# declined_recipes = []
 
 
 # # function to propose recipes 
