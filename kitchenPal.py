@@ -19,10 +19,10 @@ def suggest_recipe():
     conn.close()
 
 
-    unselected_recipes = list(set(all_recipes) - set(seen_recipes)) # create list of unseen recipes by subtracting selected_recipes ones
-
-    if unselected_recipes: # if the unselected_recipes list is populated: 
-        recipe = random.choice(unselected_recipes) # select one at random
+    unseen_recipes = [recipe for recipe in all_recipes if recipe[0] not in [r[0] for r in seen_recipes]]
+    
+    if unseen_recipes: # if the unselected_recipes list is populated: 
+        recipe = random.choice(unseen_recipes) # select one at random
         seen_recipes.append(recipe)  # append it to the list of seen recipes
         recipe_label.config(text=f"How about: {recipe[0]}?")
     else:
@@ -94,47 +94,6 @@ root.mainloop()
 #         print("Uh-oh! I can't find", filepath + ". Make sure that I'm stored in the same folder as", filepath+".")
 #         exit()
 
-
-
-
-
-# # function to propose recipes 
-# def propose_recipe():
-#     cursor.execute("SELECT RecipeName, RecipeIngredients, RecipeLink FROM recipes ORDER BY RANDOM()")
-#     rows = cursor.fetchall()
-#     conn.close()
-#     known_recipes = [{'RecipeName': row[0], 'RecipeIngredients': row[1]} for row in rows] # process all recipe name & ingredients as dict 
-#     available_recipes = [recipe for recipe in known_recipes if recipe not in selected_recipes and recipe not in declined_recipes] # available recipes = all known recipes not yet selected or declined
-#     recipe = random.choice(available_recipes) # randomly select from list of available recipes 
-#     recipe_label.config(text=f"Do you want to make {recipe}?")
-#     # else:
-#     #     recipe_label.config(text="No recipes found!")
-
-#     # global done # declare var done 
-#     # cursor.execute("SELECT RecipeName, RecipeIngredients FROM recipes") # select name & ingredients cols from recipe entries 
-#     # rows = cursor.fetchall() # fetch all rows    
-#     # while not done: # while done = False: 
-#     #     known_recipes = [{'RecipeName': row[0], 'RecipeIngredients': row[1]} for row in rows] # process all recipe name & ingredients as dict 
-#     #     available_recipes = [recipe for recipe in known_recipes if recipe not in selected_recipes and recipe not in declined_recipes] # available recipes = all known recipes not yet selected or declined 
-#     #     if not available_recipes: # if no recipes available: 
-#     #         print("You've already selected all available recipes.")
-#     #         done = True
-#     #         break
-#     #     recipe = random.choice(available_recipes) # randomly select from list of available recipes 
-#     #     print(f"Do you want to make {recipe['RecipeName']}? (y/n)") # propose recipe to user 
-#     #     choice = input().strip().lower() # process input 
-#     #     if choice == 'y':
-#     #         selected_recipes.append(recipe) # append to selected list 
-#     #         print(f"{recipe['RecipeName']} added to your list.") 
-#     #     else: 
-#     #         declined_recipes.append(recipe) # append to declined 
-#     #         print("No problem.") # and proceed to next choice 
-#     #     another_choice = input("Do you want to choose another recipe? (y/n) ").strip().lower()
-#     #     if another_choice != 'y':
-#     #         gen_list = input("Are you ready to generate your shopping list? (y/n) ").strip().lower()
-#     #         if gen_list == "y":
-#     #             done = True
-#     #             break
 
 
 # # function to generate a shopping list
