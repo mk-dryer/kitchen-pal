@@ -15,12 +15,12 @@ def suggest_recipe():
     conn = sqlite3.connect('recipeCodex.db') # connect to db
     cursor = conn.cursor()
     cursor.execute("SELECT RecipeName, RecipeIngredients FROM recipes") # select all recipes
-    all_recipes = cursor.fetchall() # fetch all as tuples
+    all_recipes = cursor.fetchall() # fetch all rows 
     conn.close()
 
     unseen_recipes = [recipe for recipe in all_recipes if recipe[0] not in [r[0] for r in seen_recipes]]
 
-    if unseen_recipes: # if the unselected_recipes list is populated: 
+    if unseen_recipes: # if the unseen_recipes list is populated: 
         recipe = random.choice(unseen_recipes) # select one at random
         seen_recipes.append(recipe)  # append it to the list of seen recipes
         recipe_label.config(text=f"How about: {recipe[0]}?")
@@ -36,7 +36,6 @@ def confirm_recipe():
 # generate the shopping list when triggered 
 def generate_shopping_list():
     shopping_list = []  # Initialize an empty shopping list
-
     for recipe in seen_recipes:  # Loop through selected recipes
         ingredients = recipe[1]  # Access RecipeIngredients (second item in tuple)
         for ingredient in ingredients.split(","):  # Split ingredients by commas
