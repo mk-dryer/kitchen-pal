@@ -25,7 +25,7 @@ Several recipes have been preloaded for your convenience. To review the existing
 2. Open recipeCodex.db.
 3. Use the Browse Data tab to review your recipes.
 
-#### Adding New Recipes 
+#### - Adding New Recipes 
 
 Use the following steps to add new recipes to your personal database: 
 
