@@ -3,116 +3,96 @@ from tkinter import messagebox
 import random
 import sqlite3
 
-# initialize an empty list to store selected & declined recipes
 
-seen_recipes = []
-chosen_recipes = []
-ingredients = []
+class RecipeApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("KitchenPal")
+        self.root.geometry("400x400")
 
-# suggest a recipe from the database
-def suggest_recipe():
+        # Initialize lists to track seen recipes, chosen recipes, and ingredients
+        self.seen_recipes = []
+        self.chosen_recipes = []
+        self.ingredients = []
+        self.current_recipe = None
 
-    conn = sqlite3.connect('recipeCodex.db') # connect to db
-    cursor = conn.cursor()
-    cursor.execute("SELECT RecipeName, RecipeIngredients FROM recipes") # select all recipes
-    all_recipes = cursor.fetchall() # fetch all rows 
-    conn.close()
+        # Create welcome frame
+        self.welcome_frame = tk.Frame(root)
+        self.welcome_frame.pack(fill="both", expand=True)
+        welcome_label = tk.Label(self.welcome_frame, text="Welcome to kitchen-pal.py!", font=("Arial", 16))
+        welcome_label.pack(pady=20)
+        proceed_button = tk.Button(self.welcome_frame, text="Proceed", command=self.proceed_to_main)
+        proceed_button.pack(pady=10)
 
-    unseen_recipes = [recipe for recipe in all_recipes if recipe[0] not in [r[0] for r in seen_recipes]]
+        # Create main frame
+        self.main_frame = tk.Frame(root)
 
-    if unseen_recipes: # if the unseen_recipes list is populated: 
-        local_recipe = random.choice(unseen_recipes) # select one at random
-        seen_recipes.append(local_recipe)  # append it to the list of seen recipes
-        recipe_label.config(text=f"How about: {local_recipe[0]}?")
-        return local_recipe
-    else:
-        recipe_label.config(text="You've seen all the recipes.")
+        # Suggest Recipe button
+        suggest_button = tk.Button(self.main_frame, text="Suggest Recipe", command=self.suggest_recipe)
+        suggest_button.pack(pady=10)
 
-# add recipe to listbox
-def confirm_recipe(passed_recipe):
-    ingredients.append(passed_recipe[1])
-    menu_listbox.insert(tk.END, passed_recipe[0]) # insert formatted label into listbox
+        # Recipe label to display suggestions
+        self.recipe_label = tk.Label(self.main_frame, text="Your recipe will appear here.")
+        self.recipe_label.pack(pady=10)
 
+        # Confirm Recipe button
+        confirm_button = tk.Button(
+            self.main_frame,
+            text="Confirm Recipe",
+            command=self.confirm_recipe
+        )
+        confirm_button.pack(pady=10)
 
-# generate the shopping list when triggered 
-def generate_shopping_list():
-    shopping_list = []
-    for ingredient in ingredients:  # split ingredients by commas
-            shopping_list.append(ingredient.strip())  # add to the list
-    shopping_list = sorted(set(shopping_list)) # deduplicate and sort 
-    messagebox.showinfo("Shopping List", shopping_list) # return list 
+        # Listbox for chosen recipes
+        self.menu_listbox = tk.Listbox(self.main_frame, height=6)
+        self.menu_listbox.pack(pady=10)
 
+        # Generate shopping list button
+        shopping_list_button = tk.Button(self.main_frame, text="Generate Shopping List", command=self.generate_shopping_list)
+        shopping_list_button.pack(pady=10)
 
+    def proceed_to_main(self):
+        self.welcome_frame.pack_forget()  # Hide welcome frame
+        self.main_frame.pack(fill="both", expand=True)  # Show main frame
 
+    def suggest_recipe(self):
+        conn = sqlite3.connect('recipeCodex.db')  # Connect to the database
+        cursor = conn.cursor()
+        cursor.execute("SELECT RecipeName, RecipeIngredients FROM recipes")  # Fetch all recipes
+        all_recipes = cursor.fetchall()
+        conn.close()
 
-# hide welcome screen and display to main interface when triggered
-def proceed_to_main():
-    welcome_frame.pack_forget()  # hide welcome frame
-    main_frame.pack(fill="both", expand=True)  # show main frame
+        unseen_recipes = [recipe for recipe in all_recipes if recipe[0] not in [r[0] for r in self.seen_recipes]]
 
-# create main window
-root = tk.Tk()
-root.title("KitchenPal")
-root.geometry("400x400")
+        if unseen_recipes:  # If there are unseen recipes
+            self.current_recipe = random.choice(unseen_recipes)  # Pick one at random
+            self.seen_recipes.append(self.current_recipe)  # Mark it as seen
+            self.recipe_label.config(text=f"How about: {self.current_recipe[0]}?")
+        else:
+            self.recipe_label.config(text="You've seen all the recipes.")
+            self.current_recipe = None  # No recipe available to confirm
 
-# create welcome frame
-welcome_frame = tk.Frame(root)
-welcome_frame.pack(fill="both", expand=True)
-welcome_label = tk.Label(welcome_frame, text="Welcome to kitchen-pal.py!", font=("Arial", 16))
-welcome_label.pack(pady=20)
-proceed_button = tk.Button(welcome_frame, text="Proceed", command=proceed_to_main)
-proceed_button.pack(pady=10)
+    def confirm_recipe(self):
+        if self.current_recipe:  # If a recipe is currently suggested
+            # Add the current recipe's ingredients and name to respective lists
+            self.ingredients.append(self.current_recipe[1])
+            self.menu_listbox.insert(tk.END, self.current_recipe[0])
+            self.recipe_label.config(text="Recipe added! Suggest another recipe.")  # Feedback
+            self.current_recipe = None  # Reset current recipe
+        else:
+            messagebox.showinfo("No Recipe Selected", "Please suggest a recipe first.")
 
-# create main frame with Suggest button, recipe label, Confirm button, listbox
-main_frame = tk.Frame(root)
-suggest_button = tk.Button(main_frame, text="Suggest Recipe", command=suggest_recipe)
-suggest_button.pack(pady=10)
-recipe_label = tk.Label(main_frame, text="Your recipe will appear here.")
-recipe_label.pack(pady=10)
-confirm_button = tk.Button(
-    main_frame, 
-    text="Confirm Recipe", 
-    command=lambda: confirm_recipe(suggest_recipe()))
-confirm_button.pack(pady=10)
-menu_listbox = tk.Listbox(main_frame, height=6)
-menu_listbox.pack(pady=10)
-
-# Button to generate shopping list
-shopping_list_button = tk.Button(main_frame, text="Generate Shopping List", command=generate_shopping_list)
-shopping_list_button.pack(pady=10)
-
-# Run the main loop
-root.mainloop()
-
-
-# # TODO: locate .db to check file architecture 
-
-# # import libs and functions 
-
-# import os
-# import random
-# import sqlite3
-# import tkinter as tk
-
-# # verify database and program located in same folder
-
-# def locate_db():
-#     cwd = os.getcwd()
-#     filepath = os.path.join(cwd, "recipeCodex.db")
-#     if os.path.exists(filepath):
-#         print("I've located your recipe codex.")
-#     else:
-#         print("Uh-oh! I can't find", filepath + ". Make sure that I'm stored in the same folder as", filepath+".")
-#         exit()
+    def generate_shopping_list(self):
+        # Generate and display the shopping list
+        shopping_list = []
+        for ingredient in self.ingredients:  # Split ingredients by commas
+            shopping_list.extend([i.strip() for i in ingredient.split(",")])  # Add to the list
+        shopping_list = sorted(set(shopping_list))  # Deduplicate and sort the list
+        messagebox.showinfo("Shopping List", "\n".join(shopping_list))  # Display the list
 
 
-
-# # function to generate a shopping list
-# def generate_shopping_list(): 
-#     shopping_list = [] # intialize empty shopping list 
-#     for recipe in selected_recipes: # for each recipe 
-#         ingredients = recipe['RecipeIngredients'] # access ingredients 
-#         for ingredient in ingredients.split(","): # split by comma  
-#             shopping_list.append(ingredient.strip()) # and append to shopping list 
-#     shopping_list = sorted(list(set(shopping_list))) # remove duplicates and sort the shopping list
-#     return shopping_list
+# Run the application
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = RecipeApp(root)
+    root.mainloop()
