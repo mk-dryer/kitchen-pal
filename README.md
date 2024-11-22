@@ -5,7 +5,9 @@ KitchenPal is a small console program designed for to assist you with weekly mea
 
 **Note: This guide is written for users on a Windows operating system.**
 
-## How to Use 
+## How to Use
+
+### Getting Setup
 
 You will need the following software installed on your machine: 
 
