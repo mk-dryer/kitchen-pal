@@ -7,7 +7,7 @@ import sqlite3
 
 seen_recipes = []
 chosen_recipes = []
-shopping_list = []
+ingredients = []
 
 # suggest a recipe from the database
 def suggest_recipe():
@@ -30,22 +30,17 @@ def suggest_recipe():
 
 # add recipe to listbox
 def confirm_recipe(passed_recipe):
-    print("passed_recipe is ", passed_recipe)
-    recipe_item = recipe_label.cget("text").replace("How about: ", "").rstrip("?") # format label for listbox 
-    menu_listbox.insert(tk.END, recipe_item) # insert formatted label into listbox
+    ingredients.append(passed_recipe[1])
+    menu_listbox.insert(tk.END, passed_recipe[0]) # insert formatted label into listbox
 
 
 # generate the shopping list when triggered 
 def generate_shopping_list():
-    shopping_list = []  # Initialize an empty shopping list
-    for recipe in seen_recipes:  # Loop through selected recipes
-        ingredients = recipe[1]  # Access RecipeIngredients (second item in tuple)
-        for ingredient in ingredients.split(","):  # Split ingredients by commas
-            shopping_list.append(ingredient.strip())  # Add stripped ingredient to the list
-
-    # Remove duplicates, sort the list, and return it
-    shopping_list = sorted(set(shopping_list))
-    messagebox.showinfo("Shopping List", shopping_list)
+    shopping_list = []
+    for ingredient in ingredients:  # split ingredients by commas
+            shopping_list.append(ingredient.strip())  # add to the list
+    shopping_list = sorted(set(shopping_list)) # deduplicate and sort 
+    messagebox.showinfo("Shopping List", shopping_list) # return list 
 
 
 
