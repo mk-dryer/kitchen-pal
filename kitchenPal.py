@@ -15,7 +15,7 @@ class RecipeApp:
         # welcome frame setup
         self.welcome_frame = tk.Frame(root)
         self.welcome_frame.pack(fill="both", expand=True)
-        welcome_label = tk.Label(self.welcome_frame, text="Welcome to kitchen-pal.py!", font=("Arial", 16))
+        welcome_label = tk.Label(self.welcome_frame, text="Welcome to KitchenPal!", font=("Arial", 16))
         welcome_label.pack(pady=20)
         proceed_button = tk.Button(self.welcome_frame, text="Proceed", command=self.proceed_to_main) # proceed to main frame when selected
         proceed_button.pack(pady=10)
