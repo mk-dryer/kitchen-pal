@@ -25,7 +25,7 @@ Several recipes have been preloaded for your convenience. To review the existing
 2. Open recipeCodex.db.
 3. Use the Browse Data tab to review your recipes.
 
-#### - Adding New Recipes 
+#### Adding New Recipes 
 
 Use the following steps to add new recipes to your personal database: 
 
@@ -35,9 +35,9 @@ Use the following steps to add new recipes to your personal database:
    - **RecipeIngredients**
    - **RecipeLink** (optional)  
 
-You may also add new records to your table on the Execute SQL tab by adapting the following SQL command: _INSERT INTO recipes (RecipeName, RecipeIngredients, RecipeLink) VALUES ("RECIPE NAME HERE", "INGREDIENT1, INGREDIENT2, INGREDIENT3", "link")_
+You may also add new records to your table on the Execute SQL tab with the following SQL command: _INSERT INTO recipes (RecipeName, RecipeIngredients, RecipeLink) VALUES ("RECIPE NAME HERE", "INGREDIENT1, INGREDIENT2, INGREDIENT3", "link")_
 
-**Note:** You may omit a recipe link when adding new records to the table because only the **RecipeName** and **RecipeIngredients** fields are utilized by the program. However, I recommend you include a link for your own information. I once made the most wonderful Thai pumpkin soup from an online recipe but lost the link. I consider this to be one of the great tragedies of my life.
+**Note:** As of version 2.0.0, only the **RecipeName** and **RecipeIngredients** fields are required fields. However, I recommend you include a link for your own information. I once made the most wonderful Thai pumpkin soup from an online recipe but lost the link. I consider this to be one of the great tragedies of my life.
 
 #### Removing Recipes 
 Use the following steps to discard a recipe: 
@@ -55,8 +55,6 @@ Once you are satisifed with the contents of your database (or just hangry), you 
 2. Select all of the text in the File Explorer path bar field and type "cmd".
 3. Hit enter to open a command line interface. 
 4. Type the command "py kitchenPal.py" to launch the program.
-
-kitchen-pal will now suggest recipes from your database of known recipes. You will respond with a simple yes (Y) or no (N) selection. You may exit the program at any point by using "Ctrl+C" on your keyboard. 
 
 ### Troubleshooting 
 
