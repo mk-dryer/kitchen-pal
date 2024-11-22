@@ -21,14 +21,16 @@ def suggest_recipe():
     unseen_recipes = [recipe for recipe in all_recipes if recipe[0] not in [r[0] for r in seen_recipes]]
 
     if unseen_recipes: # if the unseen_recipes list is populated: 
-        recipe = random.choice(unseen_recipes) # select one at random
-        seen_recipes.append(recipe)  # append it to the list of seen recipes
-        recipe_label.config(text=f"How about: {recipe[0]}?")
+        local_recipe = random.choice(unseen_recipes) # select one at random
+        seen_recipes.append(local_recipe)  # append it to the list of seen recipes
+        recipe_label.config(text=f"How about: {local_recipe[0]}?")
+        return local_recipe
     else:
         recipe_label.config(text="You've seen all the recipes.")
 
 # add recipe to listbox
-def confirm_recipe():
+def confirm_recipe(passed_recipe):
+    print("passed_recipe is ", passed_recipe)
     recipe_item = recipe_label.cget("text").replace("How about: ", "").rstrip("?") # format label for listbox 
     menu_listbox.insert(tk.END, recipe_item) # insert formatted label into listbox
 
@@ -72,7 +74,10 @@ suggest_button = tk.Button(main_frame, text="Suggest Recipe", command=suggest_re
 suggest_button.pack(pady=10)
 recipe_label = tk.Label(main_frame, text="Your recipe will appear here.")
 recipe_label.pack(pady=10)
-confirm_button = tk.Button(main_frame, text="Confirm Recipe", command=confirm_recipe)
+confirm_button = tk.Button(
+    main_frame, 
+    text="Confirm Recipe", 
+    command=lambda: confirm_recipe(suggest_recipe()))
 confirm_button.pack(pady=10)
 menu_listbox = tk.Listbox(main_frame, height=6)
 menu_listbox.pack(pady=10)
