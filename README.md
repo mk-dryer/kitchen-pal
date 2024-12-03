@@ -1,7 +1,7 @@
 # KitchenPal
 A virtual recipe box.
 
-KitchenPal is a small console program designed for to assist you with weekly meal planning. Store your favorite recipes in the Recipe Codex. KitchenPal will suggest recipes from the database for you to review. When you're ready, KitchenPal will generate a weekly shopping list. 
+KitchenPal is a small console program designed to assist you with weekly meal planning. Store your favorite recipes in the Recipe Codex. KitchenPal will suggest recipes from the database for you to review. When you're ready, KitchenPal will generate a weekly shopping list. 
 
 **Note: This guide is written for users on a Windows operating system.**
 
