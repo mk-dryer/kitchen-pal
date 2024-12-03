@@ -37,7 +37,7 @@ Use the following steps to add new recipes to your personal database:
 
 You may also add new records to your table on the Execute SQL tab with the following SQL command: _INSERT INTO recipes (RecipeName, RecipeIngredients, RecipeLink) VALUES ("RECIPE NAME HERE", "INGREDIENT1, INGREDIENT2, INGREDIENT3", "link")_
 
-**Note:** As of version 2.0.0, only the **RecipeName** and **RecipeIngredients** fields are required fields. However, I recommend you include a link for your own information. I once made the most wonderful Thai pumpkin soup from an online recipe but lost the link. I consider this to be one of the great tragedies of my life.
+**Note:** As of version 2.0.0, only the **RecipeName** and **RecipeIngredients** fields are required. However, I highly recommend you include a link for your own information. I once made the most wonderful Thai pumpkin soup from an online recipe but lost the link. I consider this to be one of the great tragedies of my life.
 
 #### Removing Recipes 
 Use the following steps to discard a recipe: 
